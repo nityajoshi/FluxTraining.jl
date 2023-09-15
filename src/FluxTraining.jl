@@ -120,5 +120,9 @@ export AbstractCallback,
     step!,
     onecycle,
     loadmodel,
-    savemodel
+    savemodel,
+    enable_shrinkloss,
+    disable_shrinkloss,
+    shrinkloss,
+    softershrink
 end # module
