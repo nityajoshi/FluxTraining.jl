@@ -18,7 +18,7 @@ function enable_shrinkloss()
     global shrinkloss_scaling = 1
 end
 """disables shrinkloss of model parameters during training phase"""
-function enable_shrinkloss()
+function disable_shrinkloss()
     global shrinkloss_scaling = 0
 end
 
