@@ -14,8 +14,8 @@ function shrinkloss(params)
     return out
 end
 """enables shrinkloss of model parameters during training phase"""
-function enable_shrinkloss()
-    global shrinkloss_scaling = 1
+function enable_shrinkloss(val::Real=1)
+    global shrinkloss_scaling = val
 end
 """disables shrinkloss of model parameters during training phase"""
 function disable_shrinkloss()
