@@ -1,4 +1,4 @@
-global shrinkloss_scaling = 0
+global shrinkloss_scaling = 1
 """the softershrink function helps create non zero loss for model parameter values not belonging to [-1,1] """
 function softershrink(x::Real)
     lo = float(x) - 1.0
