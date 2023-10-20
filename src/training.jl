@@ -1,4 +1,10 @@
 global shrinkloss_scaling = 1
+global loss_scaling = 1
+
+function scaling_val()
+    println("shrinkloss_scaling is $shrinkloss_scaling loss_scaling is $loss_scaling")
+end
+
 """the softershrink function helps create non zero loss for model parameter values not belonging to [-1,1] """
 function softershrink(x::Real)
     lo = float(x) - 1.0
@@ -14,9 +20,11 @@ function shrinkloss(params)
     return out
 end
 """enables shrinkloss of model parameters during training phase"""
-function enable_shrinkloss(val::Real=1)
-    global shrinkloss_scaling = val
+function enable_shrinkloss(val1::Real, val2::Real=1)
+    global shrinkloss_scaling = val1
+    global loss_scaling = val2
 end
+
 """disables shrinkloss of model parameters during training phase"""
 function disable_shrinkloss()
     global shrinkloss_scaling = 0
@@ -77,7 +85,7 @@ function step!(learner, phase::TrainingPhase, batch)
         state.grads = _gradient(learner.optimizer, learner.model, learner.params) do model
             state.ŷs = model(state.xs)
             handle(LossBegin())
-            state.loss = learner.lossfn(state.ŷs, state.ys) + shrinkloss_scaling*shrinkloss(learner.params)
+            state.loss = loss_scaling*(learner.lossfn(state.ŷs, state.ys)) + shrinkloss_scaling*shrinkloss(learner.params)
             handle(BackwardBegin())
             return state.loss
         end
