@@ -124,5 +124,6 @@ export AbstractCallback,
     enable_shrinkloss,
     disable_shrinkloss,
     shrinkloss,
-    softershrink
+    softershrink,
+    scaling_val
 end # module
