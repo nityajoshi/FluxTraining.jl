@@ -1,3 +1,4 @@
+using LinearAlgebra
 global shrinkloss_scaling = 1
 global loss_scaling = 1
 
